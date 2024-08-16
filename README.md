@@ -42,6 +42,11 @@ Hello everyone, this is my project of **Chat Server Application**. This is a lig
 4. **Edit the configuration**:
    Open Current **File > Edit Configuration > Add new > Maven**. In the **Run** type **jetty:run**.Then click on **Apply**
    <img width="1440" alt="Screen Shot 2024-08-16 at 11 11 36 PM" src="https://github.com/user-attachments/assets/27ed7ae3-5428-4fb1-8530-b0108de74d2b">
+5. **Run the project**
+6. **Access the Application**:
+   - **Register page**: http://localhost:8080/ChatServer/register.zul
+   - **Login page**: http://localhost:8080/ChatServer/login.zul
+   - **Chat page**: http://localhost:8080/ChatServer/userView.zul
 
    
 
