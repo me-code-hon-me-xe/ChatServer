@@ -12,25 +12,28 @@
 
 ## Introduction
 
-The Chat Server Application is a lightweight, real-time messaging platform designed to facilitate communication between users. Built using the ZK framework and JDBC for database interactions, this application allows users to chat with each other, manage their accounts, and receive real-time notifications for incoming messages.
+Hello everyone, this is my project of **Chat Server Application**. This is a lightweight, real-time messaging platform designed to facilitate communication between users. Built using the ZK framework and JDBC for database interactions, this application allows users to chat with each other, manage their accounts, and receive real-time notifications for incoming messages.
 
 ## Key Features
 
-- **Real-Time Messaging**: Users can send and receive messages in real-time.
-- **Notifications**: Notifications are displayed for incoming messages.
-- **User Authentication**: Secure login system.
-- **SQLite Database**: Local storage of chat data.
-- **ZK Framework**: Frontend development.
+- **Real-Time Messaging**: Users can send and receive messages in real-time, with instant updates to the chat view.
+- **Notifications**: Notifications are displayed when a new message is received, ensuring that users never miss a message.
+- **User Authentication**: A secure login system ensures that only authenticated users can access the chat functionality.
+- **SQLite Database**: The chat data is stored locally using SQLite, with JDBC handling the database operations.
+- **ZK Framework**: The application uses the ZK framework for the frontend, providing a responsive and interactive user interface.
 
 ## Technologies Used
 
-- **ZK Framework**: For the user interface.
-- **JDBC**: For database operations.
-- **SQLite**: Local database.
-- **Java**: Primary programming language.
+- **ZK Framework**: For building the user interface.
+- **JDBC**: For database operations and connecting to SQLite.
+- **SQLite**: As the database for storing user and message data.
+- **Java**: The primary programming language used in the project.
 
 ## How to Run the Application
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/chat-server.git
+   https://github.com/me-code-hon-me-xe/ChatServer.git
+
+1. **Clone the Repository**:
+Set up your SQLite database and configure the JDBC connection in the project settings.
