@@ -10,7 +10,6 @@
             viewModel="@id('vm') @init('com.project.viewmodel.ChatViewModel')"
             title="@load(vm.welcomeMessage)">
 
-
         <borderlayout>
             <!-- Right side: User list -->
             <east width="250px" style="border: 0.5px solid gray;">
@@ -44,7 +43,7 @@
                     </hbox>
 
                     <!-- Scrollable Chat Area -->
-                    <div height="600px" style="overflow-y:auto;" id="chatArea">
+                    <div height="400px" style="overflow-y:auto;" id="chatArea">
                         <listbox id="messageListBox" model="@bind(vm.messages)" width="100%">
                             <listhead>
                                 <listheader label="Chat"/>
@@ -69,7 +68,7 @@
 
             <!-- South: Message input -->
             <south style="border: normal solid gray; padding: 5px;">
-                <hbox>
+                <hbox >
                     <textbox id="messageTextBox" width="100%"/>
                     <button label="Send" onClick="@command('sendMessage', messageText=messageTextBox.value)"/>
                 </hbox>
@@ -77,3 +76,4 @@
         </borderlayout>
     </window>
 </zk>
+

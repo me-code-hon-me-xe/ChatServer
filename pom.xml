@@ -74,6 +74,12 @@
 
 
 		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkmax</artifactId>
+			<version>9.6.0-Eval</version>
+		</dependency>
+
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.30</version> <!-- Use the latest version compatible with your setup -->
@@ -98,24 +104,11 @@
 			<version>3.3.2</version>
 		</dependency>
 
-
 		<!-- Jetty -->
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>11.0.22</version>
-		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
 			<version>12.0.0.beta0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty.websocket</groupId>
-			<artifactId>websocket-server</artifactId>
-			<version>9.4.55.v20240627</version>
 		</dependency>
 
 		<dependency>

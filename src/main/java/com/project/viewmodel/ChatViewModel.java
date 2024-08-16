@@ -6,6 +6,7 @@ import com.project.dao.UserDAO;
 import com.project.model.Message;
 import com.project.model.Notification;
 import com.project.model.User;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -13,7 +14,12 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventQueue;
+import org.zkoss.zk.ui.event.EventQueues;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zkmax.ui.util.Toast;
+import org.zkoss.zul.Textbox;
 
 
 import java.util.ArrayList;
@@ -33,12 +39,14 @@ public class ChatViewModel {
     private User currentUser;
     private User selectedUser;
     private String welcomeMessage;
+    private EventQueue<Event> chatQueue;
 
 
     private List<Message> messages;
     private List<User> userList;
     private List<Notification> notifications;
     private Map<Integer, String> userMap;
+
 
     @Init
     @NotifyChange({"currentUser", "userList", "messages", "notifications"})
@@ -48,7 +56,10 @@ public class ChatViewModel {
 
         if (currentUser == null) {
             Executions.sendRedirect("/login.zul");
+            return;
         }
+
+//        Sessions.getCurrent().setAttribute("username", currentUser.getUsername());
 
         // Initialize DAOs
         userDAO = new UserDAO();
@@ -68,6 +79,20 @@ public class ChatViewModel {
         loadNotifications();
         updateNotificationIndicators();
 
+        chatQueue = EventQueues.lookup("chatQueue", EventQueues.APPLICATION, true);
+        chatQueue.subscribe(event -> {
+            // Check if the event pertains to the current user and selected chat
+            if (event.getName().equals("newMessage") && event.getData() instanceof Message) {
+                Message newMessage = (Message) event.getData();
+                if (newMessage.getReceiverId() == currentUser.getId() || newMessage.getSenderId() == currentUser.getId()) {
+                    loadMessages();// Refresh messages
+                    BindUtils.postNotifyChange(null, null, this, "messages");
+                }
+                if (currentUser.getId() == newMessage.getReceiverId()) {
+                    Toast.show("Notification from " + newMessage.getSenderUsername());
+                }
+            }
+        });
     }
 
 
@@ -83,6 +108,7 @@ public class ChatViewModel {
         Message message = new Message();
         message.setSenderId(currentUser.getId());
         message.setReceiverId(selectedUser.getId());
+        message.setSenderUsername(currentUser.getUsername());
         message.setMessageText(messageText);
         message.setTimestamp(new java.sql.Timestamp(System.currentTimeMillis()).toString());
         message.setSeen(0);
@@ -97,16 +123,9 @@ public class ChatViewModel {
         notification.setNotificationTime(new java.sql.Timestamp(System.currentTimeMillis()).toString());
         notificationDAO.addNotification(notification);
 
-
-        if (messageText != null) {
-            System.out.println("Sender:" + currentUser + " Receiver:" + selectedUser + " Message:" + messageText);
-        } else {
-            System.out.println("Message Text is null");
-        }
+        chatQueue.publish(new Event("newMessage", null, message));
         loadMessages();
-
     }
-
 
     @Command
     @NotifyChange({"notifications"})
@@ -123,7 +142,6 @@ public class ChatViewModel {
             messages = messageDAO.getMessagesByUserIds(currentUser.getId(), selectedUser.getId());
         }
     }
-
 
     @Command("userList")
     public void listUser() {
@@ -159,7 +177,6 @@ public class ChatViewModel {
     public String getSenderUsername(int senderId) {
         return userMap.getOrDefault(senderId, "Unknown User");
     }
-
 
     @Command
     private void updateWelcomeMessage() {
@@ -230,7 +247,6 @@ public class ChatViewModel {
     public List<Notification> getNotifications() {
         return notifications;
     }
-
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;

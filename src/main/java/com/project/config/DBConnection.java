@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:sqlite:/Users/apple/Desktop/chat1.db";
+    private static final String URL = "jdbc:sqlite:/Users/apple/Desktop/chat.db";
 
     public static void main(String[] args) {
         // Establish connection to the database
