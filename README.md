@@ -35,5 +35,11 @@ Hello everyone, this is my project of **Chat Server Application**. This is a lig
    ```bash
    https://github.com/me-code-hon-me-xe/ChatServer.git
 
-1. **Clone the Repository**:
-Set up your SQLite database and configure the JDBC connection in the project settings.
+2. **Configure the Database:**:
+Set up your SQLite database and configure the JDBC connection by opening the **DBConnection** in the project.
+<img width="1440" alt="Screen Shot 2024-08-16 at 10 52 49 PM" src="https://github.com/user-attachments/assets/cc14ccd8-7140-4a16-9339-1c3723be5dfd">
+
+3. **Run the Project**:
+   Open the project in IntelliJ IDEA and run it on your local server
+
+
