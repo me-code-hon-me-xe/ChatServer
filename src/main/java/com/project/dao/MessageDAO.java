@@ -1,7 +1,6 @@
 package com.project.dao;
 
 import com.project.config.DBConnection;
-import com.project.model.ChatRoom;
 import com.project.model.Message;
 
 import java.sql.Connection;

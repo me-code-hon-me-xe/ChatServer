@@ -1,5 +1,7 @@
 package com.project.model;
 
+import org.zkoss.zk.ui.event.Event;
+
 import java.sql.Timestamp;
 
 public class Message {

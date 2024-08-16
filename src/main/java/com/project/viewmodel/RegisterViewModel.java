@@ -1,12 +1,10 @@
 package com.project.viewmodel;
 
 import com.project.dao.UserDAO;
-import com.project.model.Message;
 import com.project.model.User;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zhtml.Messagebox;
-import org.zkoss.zk.ui.Executions;
 
 public class RegisterViewModel {
     private String username;
@@ -15,7 +13,6 @@ public class RegisterViewModel {
     private UserDAO userDAO = new UserDAO();
 
     // Getters and Setters for username, password, confirmPassword, and status
-
     public String getUsername() {
         return username;
     }

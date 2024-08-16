@@ -24,13 +24,6 @@ public class DBInitialize {
                 "FOREIGN KEY (sender_id) REFERENCES \"Users\"," +
                 "FOREIGN KEY (receiver_id) REFERENCES \"Users\");";
 
-        String createChatRoomsTable = "CREATE TABLE IF NOT EXISTS ChatRooms (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "user1_id INTEGER NOT NULL," +
-                "user2_id INTEGER NOT NULL," +
-                "FOREIGN KEY (user1_id) REFERENCES \"Users\"," +
-                "FOREIGN KEY (user2_id) REFERENCES \"Users\");";
-
         String createNotificationsTable = "CREATE TABLE IF NOT EXISTS Notifications (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "user_id INTEGER NOT NULL," +
@@ -46,7 +39,6 @@ public class DBInitialize {
             // Execute the SQL statements to create the tables
             stmt.execute(createUsersTable);
             stmt.execute(createMessagesTable);
-            stmt.execute(createChatRoomsTable);
             stmt.execute(createNotificationsTable);
 
             System.out.println("Database tables created successfully.");

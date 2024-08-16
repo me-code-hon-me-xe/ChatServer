@@ -13,25 +13,24 @@ public class LoginViewModel {
     private UserDAO userDAO;
     private String username;
     private String password;
-    private String createNewUserUrl = "/register.zul";
 
     public LoginViewModel() {
         userDAO = new UserDAO();
     }
 
-        @Command
-        public void login() {
-            User user = userDAO.getUserByUsernameAndPassword(username, password);
+    @Command
+    public void login() {
+        User user = userDAO.getUserByUsernameAndPassword(username, password);
 
-            if (user != null) {
-                // Set the current user in the session
-                Executions.getCurrent().getSession().setAttribute("currentUser", user);
-                // Redirect to the chat page
-                Executions.sendRedirect("/userView.zul");
-            } else {
-                Messagebox.show("Invalid username or password", "Error", Messagebox.OK, Messagebox.ERROR);
-            }
+        if (user != null) {
+            // Set the current user in the session
+            Executions.getCurrent().getSession().setAttribute("currentUser", user);
+            // Redirect to the chat page
+            Executions.sendRedirect("/userView.zul");
+        } else {
+            Messagebox.show("Invalid username or password", "Error", Messagebox.OK, Messagebox.ERROR);
         }
+    }
 
     public String getUsername() {
         return username;
