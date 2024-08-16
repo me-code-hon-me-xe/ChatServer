@@ -46,7 +46,7 @@ Hello everyone, this is my project of **Chat Server Application**. This is a lig
    - **Login page**: http://localhost:8080/ChatServer/login.zul
    - **Chat page**: http://localhost:8080/ChatServer/userView.zul
      
-## How to Run the Application
+## Video Demonstration
    Please enter this link to watch the Video Demonstration:
    https://drive.google.com/file/d/1_7XfboSJ0slEVi-oPdhsqfFldpotjWHX/view?usp=sharing
 
