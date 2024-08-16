@@ -34,12 +34,15 @@ Hello everyone, this is my project of **Chat Server Application**. This is a lig
 1. **Clone the Repository**:
    ```bash
    https://github.com/me-code-hon-me-xe/ChatServer.git
-
+2. **Open folder**: Extract the dowloaded folder and open it in IntelliJ IDEA.
+   <img width="1440" alt="Screen Shot 2024-08-16 at 11 03 44 PM" src="https://github.com/user-attachments/assets/c9170a2c-00c3-43fe-8549-d015289a8265">
 2. **Configure the Database:**:
-Set up your SQLite database and configure the JDBC connection by opening the **DBConnection** in the project.
-<img width="1440" alt="Screen Shot 2024-08-16 at 10 52 49 PM" src="https://github.com/user-attachments/assets/cc14ccd8-7140-4a16-9339-1c3723be5dfd">
+   Opening the **DBConnection** in the project to set up SQLite database and configure the JDBC connection to the project.
+   <img width="1440" alt="Screen Shot 2024-08-16 at 10 52 49 PM" src="https://github.com/user-attachments/assets/cc14ccd8-7140-4a16-9339-1c3723be5dfd">
+4. **Edit the configuration**:
+   Open Current **File > Edit Configuration > Add new > Maven**. In the **Run** type **jetty:run**.Then click on **Apply**
+   <img width="1440" alt="Screen Shot 2024-08-16 at 11 11 36 PM" src="https://github.com/user-attachments/assets/27ed7ae3-5428-4fb1-8530-b0108de74d2b">
 
-3. **Run the Project**:
-   Open the project in IntelliJ IDEA and run it on your local server
+   
 
 
