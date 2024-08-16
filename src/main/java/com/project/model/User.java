@@ -7,8 +7,17 @@ public class User {
     private String password;
     private String status;
     private Integer notification;
+    private boolean notificationIndicator;
 
     // Getters and Setters
+
+    public boolean isNotificationIndicator() {
+        return notificationIndicator;
+    }
+
+    public void setNotificationIndicator(boolean notificationIndicator) {
+        this.notificationIndicator = notificationIndicator;
+    }
 
     public int getId() {
         return id;

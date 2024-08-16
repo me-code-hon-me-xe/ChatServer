@@ -26,8 +26,7 @@
                                         <hbox>
                                             <!-- Display the username -->
                                             <label value="@load(user.username)" style="font-weight: bold;" />
-
-
+                                            <label visible="@load(user.notificationIndicator)" style="background-color: red; color: white; border-radius: 50%; width: 12px; height: 12px; margin-left: 5px; text-align: center;" value="!" />
                                         </hbox>
                                     </listcell>
                                 </listitem>

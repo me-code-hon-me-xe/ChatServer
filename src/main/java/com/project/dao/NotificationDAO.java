@@ -13,13 +13,14 @@ import java.util.List;
 public class NotificationDAO {
 
     public void addNotification(Notification notification) {
-        String sql = "INSERT INTO Notifications(user_id, message_id, notification_time) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Notifications(user_id, sender_id, message_id, notification_time) VALUES(?, ?, ?, ?)";
         try (Connection conn = DBConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, notification.getUserId());
-            pstmt.setInt(2, notification.getMessageId());
-            pstmt.setString(3, notification.getNotificationTime());
+            pstmt.setInt(2, notification.getSenderId());
+            pstmt.setInt(3, notification.getMessageId());
+            pstmt.setString(4, notification.getNotificationTime());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -27,8 +28,48 @@ public class NotificationDAO {
         }
     }
 
+    public void markNotificationAsRead(int notificationId) {
+        String sql = "UPDATE Notifications SET seen = 1 WHERE id = ?";
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, notificationId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteNotificationsByUserId(int userId, int senderId) {
+        String sql = "DELETE FROM Notifications WHERE user_id = ? AND sender_id = ?";
+        try (Connection connection = DBConnection.connect();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, senderId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Integer> getUsersWithNotificationsFrom(int currentUserId) {
+        List<Integer> userIds = new ArrayList<>();
+        String query = "SELECT * FROM Notifications WHERE user_id = ? AND seen = 0";
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, currentUserId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                userIds.add(rs.getInt("sender_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userIds;
+    }
+
+
     public List<Notification> getNotificationsByUserId(int userId) {
-        String sql = "SELECT * FROM Notifications WHERE user_id = ?";
+        String sql = "SELECT * FROM Notifications WHERE user_id = ? AND seen = 0";
         List<Notification> notifications = new ArrayList<>();
 
         try (Connection conn = DBConnection.connect();
@@ -49,6 +90,18 @@ public class NotificationDAO {
             System.out.println("Error fetching notifications: " + e.getMessage());
         }
         return notifications;
+    }
+
+    public void markAsRead(int userId, int senderId) {
+        String query = "UPDATE Notifications SET seen = 1 WHERE user_Id = ? AND sender_Id = ?";
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, senderId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

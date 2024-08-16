@@ -5,10 +5,28 @@ import java.sql.Timestamp;
 public class Notification {
     private int id;
     private int userId;
+    private int senderId;
     private int messageId;
+    private int seen;
     private String notificationTime;
 
     // Getters and Setters
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getSeen() {
+        return seen;
+    }
+
+    public void setSeen(int seen) {
+        this.seen = seen;
+    }
 
     public int getId() {
         return id;

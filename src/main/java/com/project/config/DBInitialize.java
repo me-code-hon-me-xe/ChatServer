@@ -34,7 +34,9 @@ public class DBInitialize {
         String createNotificationsTable = "CREATE TABLE IF NOT EXISTS Notifications (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "user_id INTEGER NOT NULL," +
+                "sender_id INTEGER NOT NULL," +
                 "message_id INTEGER NOT NULL," +
+                "seen INTEGER DEFAULT 0," +
                 "notification_time TEXT DEFAULT CURRENT_TIMESTAMP," +
                 "FOREIGN KEY (user_id) REFERENCES \"Users\"," +
                 "FOREIGN KEY (message_id) REFERENCES \"Messages\");";

@@ -43,11 +43,12 @@ public class ChatViewModel {
 	private Map<Integer, String> userMap;
 	private Map<Integer, Integer> unreadMessagesCount = new HashMap<>();
 
+
 	private Session websocketSession;
 
 	@Init
-	@NotifyChange({"currentUser"})
-	public void init() {
+	@NotifyChange({"currentUser", "userList", "messages", "notifications"})
+	public void init() throws Exception {
 		// Retrieve currentUser from the session
 		currentUser = (User) Sessions.getCurrent().getAttribute("currentUser");
 
@@ -62,6 +63,8 @@ public class ChatViewModel {
 		notificationDAO = new NotificationDAO();
 		userMap = new HashMap<>();
 
+
+
 		// Load users and create the userMap
 		for (User user : userDAO.getAllUsers()) {
 			userMap.put(user.getId(), user.getUsername());
@@ -72,6 +75,8 @@ public class ChatViewModel {
 		listUser();
 		loadMessages();
 		loadNotifications();
+		updateNotificationIndicators();
+
 
 
 	}
@@ -92,10 +97,13 @@ public class ChatViewModel {
 		// Notify recipient
 		Notification notification = new Notification();
 		notification.setUserId(selectedUser.getId());
+		notification.setSenderId(currentUser.getId());
 		notification.setMessageId(message.getId());
 		System.out.println(message.getId());
 		notification.setNotificationTime(new java.sql.Timestamp(System.currentTimeMillis()).toString());
 		notificationDAO.addNotification(notification);
+
+
 
 		if(messageText != null) {
 			System.out.println("Sender:" + currentUser + " Receiver:" + selectedUser + " Message:" + messageText);
@@ -139,7 +147,17 @@ public class ChatViewModel {
 		this.selectedUser = user;
 		if (user != null) {
 			Messagebox.show("Let's chat with " + selectedUser.getUsername());
+
+
+			System.out.println("Thisi me ");
+			notificationDAO.deleteNotificationsByUserId(currentUser.getId(), selectedUser.getId());
+
 			loadMessages();
+
+			loadNotifications();
+
+			updateNotificationIndicators();
+
 		} else {
 			System.out.println("User is null");
 		}
@@ -157,6 +175,19 @@ public class ChatViewModel {
 			this.welcomeMessage = "Chat Application - Welcome back " + currentUser.getUsername();
 		} else {
 			this.welcomeMessage = "Chat Application - Welcome back";
+		}
+	}
+
+	@Command
+	@NotifyChange({"userList"})
+	public void updateNotificationIndicators() {
+		if (currentUser != null) {
+			List<Integer> usersWithNotifications = notificationDAO.getUsersWithNotificationsFrom(currentUser.getId());
+			System.out.println(usersWithNotifications);
+
+			for (User user : userList) {
+				user.setNotificationIndicator(usersWithNotifications.contains(user.getId()));
+			}
 		}
 	}
 
