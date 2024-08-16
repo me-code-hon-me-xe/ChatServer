@@ -6,9 +6,7 @@
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
 - [How to Run the Application](#how-to-run-the-application)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-- [License](#license)
+- [Video Demonstration](#video-demonstration)
 
 ## Introduction
 
@@ -47,7 +45,9 @@ Hello everyone, this is my project of **Chat Server Application**. This is a lig
    - **Register page**: http://localhost:8080/ChatServer/register.zul
    - **Login page**: http://localhost:8080/ChatServer/login.zul
    - **Chat page**: http://localhost:8080/ChatServer/userView.zul
-
-   
+     
+## How to Run the Application
+   Please enter this link to watch the Video Demonstration:
+   https://drive.google.com/file/d/1_7XfboSJ0slEVi-oPdhsqfFldpotjWHX/view?usp=sharing
 
 
