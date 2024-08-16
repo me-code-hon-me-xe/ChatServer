@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="native" xmlns:n="native" xmlns:w="zk" xmlns:zk="http://www.zkoss.org/2005/zul">
+    <!-- Window component to contain the login interface -->
+    <window title="Login" border="normal" width="400px" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.project.viewmodel.LoginViewModel')">
+
+        <vlayout>
+            <!-- Username Field -->
+            <hbox>
+                <label value="Username:"/>
+                <textbox value="@bind(vm.username)" />
+            </hbox>
+
+            <!-- Password Field -->
+            <hbox>
+                <label value="Password:"/>
+                <textbox type="password" value="@bind(vm.password)" />
+            </hbox>
+
+            <!-- Login Button -->
+            <button label="Login" onClick="@command('login')" />
+
+            <!-- Create New User Link -->
+            <hlayout>
+                <label value="Don't have an account?" />
+                <a label="Create new user" href="/register.zul" />
+            </hlayout>
+        </vlayout>
+    </window>
+</zk>

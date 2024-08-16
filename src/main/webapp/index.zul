@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns:h="native">
+    <window title="User List" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.project.MyViewModel')">
+        <listbox id="userList" model="@load(vm.users)">
+            <listhead>
+                <listheader label="ID" />
+                <listheader label="Name" />
+                <listheader label="Age" />
+            </listhead>
+            <template name="model" var="user">
+                <listitem>
+                    <listcell label="@load(user.id)" />
+                    <listcell label="@load(user.name)" />
+                    <listcell label="@load(user.age)" />
+                </listitem>
+            </template>
+        </listbox>
+        <button label="Refresh Data" onClick="@command('fetchData')" />
+    </window>
+</zk>

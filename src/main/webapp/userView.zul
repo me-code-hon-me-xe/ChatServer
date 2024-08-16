@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/styles.css"?>
+
+<zk xmlns:h="native"
+    xmlns:n="native"
+    xmlns:w="zk"
+    xmlns:zk="http://www.zkoss.org/2005/zul">
+
+
+
+
+    <window border="normal" width="100%" height="100%" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.project.viewmodel.ChatViewModel')"
+            title="@load(vm.welcomeMessage)">
+        <borderlayout>
+            <!-- Right side: User list -->
+            <east width="250px" style="border: 0.5px solid gray;">
+                <vlayout>
+                    <listbox id="userListBox" model="@bind(vm.userList)" width="100%" height="100%">
+                        <listhead>
+                            <listheader label="Online user"/>
+                        </listhead>
+                        <template name="model" var="user">
+                            <listitem value="@load(user)" onClick="@command('selectUser', user=user)">
+                                    <listcell>
+                                        <hbox>
+                                            <!-- Display the username -->
+                                            <label value="@load(user.username)" style="font-weight: bold;" />
+
+
+                                        </hbox>
+                                    </listcell>
+                                </listitem>
+                        </template>
+                    </listbox>
+                </vlayout>
+            </east>
+            <!-- Center: Chat area -->
+            <center>
+                <vlayout>
+                    <!-- Display selected user's name -->
+                    <hbox>
+
+                        <label>You are chatting with</label>
+                        <label value="@load(vm.selectedUser.username)" style="font-weight: bold"/>
+                    </hbox>
+                    <listbox id="messageListBox" model="@bind(vm.messages)" width="100%" height="100%">
+                        <listhead>
+                            <listheader label="Chat"/>
+                        </listhead>
+                        <template name="model" var="message">
+                            <listitem>
+                                <listcell style="background-color:'#ADD8E6'">
+                                    <label value="@bind(vm.getSenderUsername(message.senderId))"
+                                     style="font-weight: bold; background-color:'#ADD8E6')"
+                                    />
+                                    <label>-</label>
+                                    <label value="@load(message.messageText)"
+                                    style="background-color:@load(message.senderId == vm.currentUser.id ? 'lightblue' : 'white')"
+
+                                    />
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </vlayout>
+            </center>
+            <south style="border: normal solid gray; padding: 5px;">
+                <hbox>
+                    <textbox id="messageTextBox" width="100%"/>
+                    <button label="Send" onClick="@command('sendMessage', messageText=messageTextBox.value)"/>
+                </hbox>
+            </south>
+        </borderlayout>
+    </window>
+</zk>
