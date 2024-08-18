@@ -86,7 +86,10 @@ public class ChatViewModel {
                 Message newMessage = (Message) event.getData();
                 if (newMessage.getReceiverId() == currentUser.getId() || newMessage.getSenderId() == currentUser.getId()) {
                     loadMessages();// Refresh messages
+                    loadNotifications();
+                    updateNotificationIndicators();
                     BindUtils.postNotifyChange(null, null, this, "messages");
+                    BindUtils.postNotifyChange(null, null, this, "userList");
                 }
                 if (currentUser.getId() == newMessage.getReceiverId()) {
                     Toast.show("Notification from " + newMessage.getSenderUsername());
