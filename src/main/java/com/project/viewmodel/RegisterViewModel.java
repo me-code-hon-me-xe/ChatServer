@@ -44,7 +44,7 @@ public class RegisterViewModel {
 
         User existingUser = userDAO.getUserByUsername(username);
         if (existingUser != null) {
-            // Display error message (e.g., using a ZK notification)
+            // Display error message
             org.zkoss.zk.ui.util.Clients.showNotification("Username already exists!");
             return;
         }
@@ -58,6 +58,5 @@ public class RegisterViewModel {
         // Add the new user to the database
         userDAO.addUser(newUser);
         Messagebox.show("Register successfully!");
-        // Redirect to login page after successful registration
     }
 }
